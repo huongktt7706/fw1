@@ -1,0 +1,30 @@
+<h2>Danh sách truyện tranh</h2>
+
+@if (stories.length === 0) {
+<p>Không có truyện nào</p>
+} @else {
+<table>
+  <thead>
+    <tr>
+      <th>anh</th>
+      <th>title</th>
+      <th>tac gia</th>
+      <th>luot xem</th>
+      <th>nam</th>
+      <th>the loai</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (story of stories; track story.title; let i = $index) {
+    <tr>
+      <td><img [src]="story.image" [alt]="story.title" /></td>
+      <td>{{ story.title }}</td>
+      <td>{{ story.author }}</td>
+      <td>{{ story.views }} @if (story.views > 90000) {<span class="hot">hit</span>}</td>
+      <td>{{ story.year }}</td>
+      <td>{{ story.category }}</td>
+    </tr>
+    }
+  </tbody>
+</table>
+}
