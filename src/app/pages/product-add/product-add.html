@@ -1,0 +1,30 @@
+<p>product-add works!</p>
+<h2>Thêm sản phẩm</h2>
+
+<form [formGroup]="productForm" (ngSubmit)="submitForm()">
+  
+  <div>
+    <label>Tên</label>
+    <input type="text" formControlName="name" />
+    @if (name?.invalid && name?.touched) {
+      <p style="color:red">Tên không được để trống</p>
+    }
+  </div>
+
+  <div>
+    <label>Giá</label>
+    <input type="number" formControlName="price" />
+    @if (price?.invalid && price?.touched) {
+      <p style="color:red">Giá phải > 0</p>
+    }
+  </div>
+
+  <div>
+    <label>Danh mục</label>
+    <input type="text" formControlName="category" />
+  </div>
+
+  <button type="submit" [disabled]="productForm.invalid">
+    Thêm
+  </button>
+</form>

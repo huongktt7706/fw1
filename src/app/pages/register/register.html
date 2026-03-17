@@ -1,0 +1,28 @@
+<p>register works!</p>
+<h2>Đăng ký</h2>
+
+<form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+  
+  <div>
+    <label>Username</label>
+    <input type="text" formControlName="username" />
+  </div>
+
+  <div>
+    <label>Email</label>
+    <input type="email" formControlName="email" />
+  </div>
+
+  <div>
+    <label>Password</label>
+    <input type="password" formControlName="password" />
+    
+    @if (password?.invalid && password?.touched) {
+      <p style="color:red">Password phải ≥ 6 ký tự</p>
+    }
+  </div>
+
+  <button type="submit" [disabled]="registerForm.invalid">
+    Đăng ký
+  </button>
+</form>
