@@ -1,28 +1,19 @@
-<p>add-story works!</p>
-<h2>Thêm truyện tranh</h2>
+<h2>Thêm truyện</h2>
 
 <form [formGroup]="addForm" (ngSubmit)="submitForm()">
-  <div>
-    <label>Tên truyện</label>
-    <input type="text" formControlName="title" />
+  <input formControlName="title" placeholder="Tên truyện" />
+  <input formControlName="author" placeholder="Tác giả" />
+  <input formControlName="views" type="number" placeholder="Lượt xem" />
 
-    @if (title?.invalid && title?.touched) {
-
-    <p style="color: red">Tên truyện phải ít nhất 3 ký tự</p>
-
-    }
-  </div>
-
-  <div>
-    <label>Tác giả</label>
-    <input type="text" formControlName="author" />
-  </div>
-
-  <div>
-    <label>Lượt xem</label>
-    <input type="number" formControlName="views" />
-  </div>
-
-  <button type="submit" [disabled]="addForm.invalid">Thêm truyện</button>
-
+  <button [disabled]="loading">
+    {{ loading ? 'Đang thêm...' : 'Thêm' }}
+  </button>
 </form>
+
+@if (success) {
+  <p style="color:green">{{ success }}</p>
+}
+
+@if (error) {
+  <p style="color:red">{{ error }}</p>
+}

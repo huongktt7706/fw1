@@ -1,35 +1,47 @@
-<h2>Danh sách truyện tranh</h2>
+<h2>Danh sách truyện</h2>
 
-@if (stories.length === 0) {
-<p>Không có truyện nào</p>
-} @else {
-<table>
-  <thead>
-    <tr>
-      <th>stt</th>
-      <th>anh</th>
-      <th>title</th>
-      <th>tac gia</th>
-      <th>luot xem</th>
-      <th>nam</th>
-      <th>the loai</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    @for (story of stories; track story.title;let i=$index) {
-    <tr>
-      <td>{{i + 1}}</td>
-      <td><img [src]="story.image" [alt]="story.title" /></td>
-      <td>{{ story.title }}</td>
-      <td>{{ story.author }}</td>
-      <td>{{ story.views }} @if ((story?.views ?? 0) > 90000) {<span class="hot">hot</span>}</td>
-      <td>{{ story.year }}</td>
-      <td>{{ story.category }}</td>
-      
-      
-    </tr>
-    }
-  </tbody>
+@if (loading) {
+  <p>Đang tải dữ liệu...</p>
+}
+
+@if (error) {
+  <p style="color:red">{{ error }}</p>
+}
+
+@if (!loading && stories.length === 0) {
+  <p>Không có truyện nào</p>
+}
+
+@if (stories.length > 0) {
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Tên</th>
+    <th>Tác giả</th>
+    <th>Views</th>
+    <th>Hành động</th>
+  </tr>
+
+  @for (story of stories; track story.id) {
+  <tr>
+    <td>{{ story.id }}</td>
+    <td>
+      {{ story.title }}
+      @if (story.views > 90000) {
+        🔥 HOT
+      }
+    </td>
+    <td>{{ story.author }}</td>
+    <td>{{ story.views }}</td>
+    <td>
+      <button
+        (click)="deleteStory(story.id)"
+        [disabled]="deletingId === story.id"
+      >
+        {{ deletingId === story.id ? 'Đang xóa...' : 'Xóa' }}
+      </button>
+    </td>
+  </tr>
+  }
 </table>
 }
