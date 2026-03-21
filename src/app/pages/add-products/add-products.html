@@ -1,0 +1,10 @@
+<h2>Thêm sản phẩm</h2>
+
+<form [formGroup]="productForm" (ngSubmit)="submitProduct()">
+  <input formControlName="name" placeholder="Tên" />
+  <input formControlName="price" type="number" placeholder="Giá" />
+
+  <button [disabled]="loading">
+    {{ loading ? 'Đang thêm...' : 'Thêm' }}
+  </button>
+</form>

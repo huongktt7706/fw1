@@ -1,0 +1,36 @@
+<h2>Danh sách sản phẩm</h2>
+
+@if (loading) {
+  <p>Đang tải...</p>
+}
+
+@if (error) {
+  <p style="color:red">{{ error }}</p>
+}
+
+@if (products.length > 0) {
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Tên</th>
+    <th>Giá</th>
+    <th></th>
+  </tr>
+
+  @for (p of products; track p.id) {
+  <tr>
+    <td>{{ p.id }}</td>
+    <td>{{ p.name }}</td>
+    <td>{{ p.price }}</td>
+    <td>
+      <button
+        (click)="deleteProduct(p.id)"
+        [disabled]="deletingId === p.id"
+      >
+        {{ deletingId === p.id ? 'Đang xóa...' : 'Xóa' }}
+      </button>
+    </td>
+  </tr>
+  }
+</table>
+}
